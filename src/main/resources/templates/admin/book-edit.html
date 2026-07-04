@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{admin/fragments/head :: head('Edit Book')}">
+</head>
+
+<body>
+
+<div class="admin-layout">
+
+    <div th:replace="~{admin/fragments/sidebar :: sidebar}">
+    </div>
+
+    <main class="admin-content">
+
+        <div class="section-header">
+            <div class="title">
+                <span>BookNest Admin</span>
+            </div>
+
+            <h2 class="section-title">
+                Edit Book
+            </h2>
+        </div>
+
+        <div class="col-md-8 col-lg-6">
+
+            <form class="book-form"
+                  th:action="@{/admin/books/{id}/edit(id=${bookId})}"
+                  th:object="${bookEditRequest}"
+                  method="post">
+
+                <div class="mb-3">
+                    <input type="text"
+                           class="form-control"
+                           placeholder="Title"
+                           th:field="*{title}">
+
+                    <div class="text-danger small mt-1"
+                         th:if="${#fields.hasErrors('title')}"
+                         th:errors="*{title}">
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <input type="text"
+                           class="form-control"
+                           placeholder="Author"
+                           th:field="*{author}">
+
+                    <div class="text-danger small mt-1"
+                         th:if="${#fields.hasErrors('author')}"
+                         th:errors="*{author}">
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <textarea class="form-control"
+                              rows="4"
+                              placeholder="Description"
+                              th:field="*{description}"></textarea>
+
+                    <div class="text-danger small mt-1"
+                         th:if="${#fields.hasErrors('description')}"
+                         th:errors="*{description}">
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <select class="form-control" th:field="*{genre}">
+                        <option value="">Select Genre</option>
+                        <option th:each="genre : ${genres}"
+                                th:value="${genre}"
+                                th:text="${genre}">
+                        </option>
+                    </select>
+
+                    <div class="text-danger small mt-1"
+                         th:if="${#fields.hasErrors('genre')}"
+                         th:errors="*{genre}">
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <select class="form-control" th:field="*{status}">
+                        <option value="">Select Status</option>
+                        <option th:each="status : ${statuses}"
+                                th:value="${status}"
+                                th:text="${status}">
+                        </option>
+                    </select>
+
+                    <div class="text-danger small mt-1"
+                         th:if="${#fields.hasErrors('status')}"
+                         th:errors="*{status}">
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <input type="number"
+                           class="form-control"
+                           placeholder="Release Year"
+                           min="1000"
+                           th:field="*{releaseYear}">
+
+                    <div class="text-danger small mt-1"
+                         th:if="${#fields.hasErrors('releaseYear')}"
+                         th:errors="*{releaseYear}">
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <input type="number"
+                           step="0.01"
+                           min="0"
+                           class="form-control"
+                           placeholder="Rental Price"
+                           th:field="*{rentalPrice}">
+
+                    <div class="text-danger small mt-1"
+                         th:if="${#fields.hasErrors('rentalPrice')}"
+                         th:errors="*{rentalPrice}">
+                    </div>
+                </div>
+
+                <div class="mb-4 text-center">
+                    <img th:src="${bookEditRequest.bookImage}"
+                         th:unless="${#strings.isEmpty(bookEditRequest.bookImage)}"
+                         alt="Book Cover"
+                         class="img-fluid rounded shadow-sm"
+                         style="max-height: 300px;">
+
+                    <img th:src="@{/images/single-no-image-cover.png}"
+                         th:if="${#strings.isEmpty(bookEditRequest.bookImage)}"
+                         alt="Book Cover"
+                         class="img-fluid rounded shadow-sm"
+                         style="max-height: 300px;">
+                </div>
+
+                <div class="mb-4">
+                    <input type="text"
+                           class="form-control"
+                           placeholder="Book Image URL"
+                           th:field="*{bookImage}">
+                </div>
+
+                <div class="mb-3 form-check">
+                    <input type="checkbox"
+                           class="form-check-input"
+                           id="featured"
+                           th:field="*{featured}">
+
+                    <label class="form-check-label" for="featured">
+                        Featured Book
+                    </label>
+                </div>
+
+                <div class="btn-wrap">
+
+                    <button type="submit"
+                            class="btn btn-outline-accent btn-accent-arrow">
+                        Save Changes
+                    </button>
+
+                    <a th:href="@{/admin/books}"
+                       style="margin-left:20px;">
+                        Cancel
+                    </a>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </main>
+
+</div>
+
+<div th:replace="~{admin/fragments/footer :: footer}">
+</div>
+
+</body>
+</html>

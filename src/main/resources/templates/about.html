@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/head :: head('About BookNest')}"></head>
+
+<body>
+
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<section class="py-5 my-5">
+
+    <div class="container">
+
+        <div class="section-header align-center">
+            <div class="title">
+                <span>Learn more about us</span>
+            </div>
+            <h2 class="section-title">About BookNest</h2>
+        </div>
+
+        <div class="row justify-content-center">
+
+            <div class="col-md-8">
+
+                <p>
+                    BookNest is an online library and book reservation platform
+                    built with Spring Boot, Thymeleaf and MySQL.
+                </p>
+
+                <p>
+                    Our mission is to help readers discover new books,
+                    explore different genres and reserve titles with ease.
+                </p>
+
+                <p>
+                    BookNest allows users to browse books, view details,
+                    manage reservations and enjoy a modern digital library experience.
+                </p>
+
+                <p>
+                    This project was developed as part of the SoftUni Java Web course.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+<th:block th:replace="~{fragments/scripts :: scripts}"></th:block>
+
+</body>
+</html>

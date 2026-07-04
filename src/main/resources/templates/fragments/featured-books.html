@@ -1,0 +1,82 @@
+<div th:fragment="featuredBooks">
+
+    <section id="featured-books" class="py-5 my-5">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-12">
+
+                    <div class="section-header align-center">
+                        <div class="title">
+                            <span>Selected by BookNest</span>
+                        </div>
+                        <h2 class="section-title">Featured Books</h2>
+                    </div>
+
+                    <div class="product-list" data-aos="fade-up">
+
+                        <div th:if="${#lists.isEmpty(featuredBooks)}"
+                             class="text-center py-5">
+                            No featured books available.
+                        </div>
+
+                        <div class="row"
+                             th:unless="${#lists.isEmpty(featuredBooks)}">
+
+                            <div class="col-md-3"
+                                 th:each="book : ${featuredBooks}">
+
+                                <div class="product-item">
+                                    <figure class="product-style">
+                                        <img th:src="${book.bookImage == null or #strings.isEmpty(book.bookImage.trim())
+                                        ? '/images/product-item-no-image-cover.png'
+                                        : book.bookImage}"
+                                             th:alt="${book.title}"
+                                             class="book-cover-img">
+                                    </figure>
+
+                                    <figcaption>
+                                        <h3 th:text="${book.title}">Book Title</h3>
+                                        <span th:text="${book.author}">Author</span>
+
+                                        <div class="item-price"
+                                             th:text="'Reserve for $ ' + ${book.rentalPrice}">
+                                            Reserve for $ 10.00
+                                        </div>
+
+                                        <div class="btn-wrap mt-3">
+                                            <a th:href="@{/books/{id}(id=${book.id})}"
+                                               class="btn btn-outline-accent btn-accent-arrow">
+                                                View Details
+                                                <i class="icon icon-ns-arrow-right"></i>
+                                            </a>
+                                        </div>
+                                    </figcaption>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="btn-wrap align-right">
+                        <a th:href="@{/books}" class="btn-accent-arrow">
+                            View all books
+                            <i class="icon icon-ns-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+</div>

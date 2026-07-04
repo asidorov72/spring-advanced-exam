@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{admin/fragments/head :: head('BookNest | Users Management')}">
+</head>
+
+<body>
+
+<div class="admin-layout">
+
+    <div th:replace="~{admin/fragments/sidebar :: sidebar}">
+    </div>
+
+    <main class="admin-content">
+
+        <div th:replace="~{admin/fragments/header :: header('Users Management')}">
+        </div>
+
+        <div class="admin-card">
+
+            <table class="admin-table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>USERNAME</th>
+                    <th>EMAIL</th>
+                    <th>FULL NAME</th>
+                    <th>ROLE</th>
+                    <th>CREATED ON</th>
+                    <th>ACTIONS</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:if="${#lists.isEmpty(users)}">
+                    <td colspan="7" class="empty-state">
+                        No users found.
+                    </td>
+                </tr>
+                <tr th:each="user : ${users}">
+                    <td th:text="${user.id}">id</td>
+                    <td th:text="${user.username}">username</td>
+                    <td th:text="${user.email}">email</td>
+
+                    <td th:text="${user.fullName != '' ? user.fullName : 'Not specified'}">
+                        Full Name
+                    </td>
+
+                    <td>
+                        <span class="admin-role-badge"
+                              th:text="${user.role}">
+                            USER
+                        </span>
+                    </td>
+
+                    <td th:text="${#temporals.format(user.createdOn, 'dd.MM.yyyy HH:mm')}">
+                        15.06.2026 14:30
+                    </td>
+
+                    <td>
+                        <a th:href="@{/admin/users/{id}/edit(id=${user.id})}"
+                           class="admin-action-btn">
+                            Edit
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+    </main>
+
+</div>
+
+<div th:replace="~{admin/fragments/footer :: footer}">
+</div>
+
+</body>
+</html>

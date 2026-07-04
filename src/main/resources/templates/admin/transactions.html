@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{admin/fragments/head :: head('BookNest | Transactions Management')}">
+</head>
+
+<body>
+
+<div class="admin-layout">
+
+    <div th:replace="~{admin/fragments/sidebar :: sidebar}">
+    </div>
+
+    <main class="admin-content">
+
+        <div th:replace="~{admin/fragments/header :: header('Transactions Management')}">
+        </div>
+
+        <div class="admin-card">
+
+            <table class="admin-table">
+
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>USER</th>
+                    <th>BOOK</th>
+                    <th>AMOUNT</th>
+                    <th>STATUS</th>
+                    <th>CREATED ON</th>
+                </tr>
+                </thead>
+
+                <tbody>
+
+                <tr th:if="${#lists.isEmpty(transactions)}">
+                    <td colspan="6" class="empty-state">
+                        No transactions found.
+                    </td>
+                </tr>
+
+                <tr th:each="transaction : ${transactions}">
+
+                    <td th:text="${transaction.id}">
+                        id
+                    </td>
+
+                    <td th:text="${transaction.user.username}">
+                        user
+                    </td>
+
+                    <td th:text="${transaction.reservation.book.title}">
+                        book
+                    </td>
+
+                    <td th:text="${'$ ' + transaction.amount}">
+                        10.00
+                    </td>
+
+                    <td>
+                        <span class="admin-status-badge"
+                              th:classappend="${
+                                  transaction.status.name() == 'SUCCESSFUL' ? ' status-active' :
+                                  transaction.status.name() == 'PENDING' ? ' status-reserved' :
+                                  ' status-inactive'
+                              }"
+                              th:text="${transaction.status}">
+                            SUCCESSFUL
+                        </span>
+                    </td>
+
+                    <td th:text="${#temporals.format(transaction.createdOn, 'dd.MM.yyyy HH:mm')}">
+                        19.06.2026 18:30
+                    </td>
+
+                </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </main>
+
+</div>
+
+<div th:replace="~{admin/fragments/footer :: footer}">
+</div>
+
+</body>
+</html>

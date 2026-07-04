@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/head :: head('Contact BookNest')}"></head>
+
+<body>
+
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<section class="py-5 my-5">
+
+    <div class="container">
+
+        <div class="section-header align-center">
+            <div class="title">
+                <span>Get in touch</span>
+            </div>
+            <h2 class="section-title">Contact BookNest</h2>
+        </div>
+
+        <div class="row justify-content-center">
+
+            <div class="col-md-10">
+
+                <div class="row">
+
+                    <div class="col-md-5">
+
+                        <p>
+                            Have a question about our books, reservations or your account?
+                            Feel free to contact the BookNest team.
+                        </p>
+
+                        <div class="mt-5">
+                            <h3>BookNest Library</h3>
+                            <p>Sofia, Bulgaria</p>
+                        </div>
+
+                        <div class="mt-4">
+                            <h3>Email</h3>
+                            <p>contact@booknest.local</p>
+                        </div>
+
+                        <div class="mt-4">
+                            <h3>Phone</h3>
+                            <p>+359 888 123 456</p>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-7">
+
+                        <div th:if="${successMessage}"
+                             class="alert alert-success text-center mb-4"
+                             th:text="${successMessage}">
+                            Message sent.
+                        </div>
+
+                        <form th:action="@{/contact}"
+                              th:object="${contactRequest}"
+                              method="post"
+                              class="contact-form"
+                              novalidate>
+
+                            <div class="form-group mb-3">
+                                <input type="text"
+                                       th:field="*{name}"
+                                       class="form-control"
+                                       placeholder="Your name">
+
+                                <div class="text-danger small mt-1"
+                                     th:if="${#fields.hasErrors('name')}"
+                                     th:errors="*{name}">
+                                    Name error
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <input type="email"
+                                       th:field="*{email}"
+                                       class="form-control"
+                                       placeholder="Your email">
+
+                                <div class="text-danger small mt-1"
+                                     th:if="${#fields.hasErrors('email')}"
+                                     th:errors="*{email}">
+                                    Email error
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <input type="text"
+                                       th:field="*{subject}"
+                                       class="form-control"
+                                       placeholder="Subject">
+
+                                <div class="text-danger small mt-1"
+                                     th:if="${#fields.hasErrors('subject')}"
+                                     th:errors="*{subject}">
+                                    Subject error
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-4">
+                                <textarea th:field="*{message}"
+                                          class="form-control"
+                                          rows="6"
+                                          placeholder="Your message"></textarea>
+
+                                <div class="text-danger small mt-1"
+                                     th:if="${#fields.hasErrors('message')}"
+                                     th:errors="*{message}">
+                                    Message error
+                                </div>
+                            </div>
+
+                            <div class="btn-wrap mt-5">
+                                <button type="submit"
+                                        class="btn btn-outline-accent btn-accent-arrow contact-btn">
+                                    Send Message
+                                    <i class="icon icon-ns-arrow-right"></i>
+                                </button>
+                            </div>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+<th:block th:replace="~{fragments/scripts :: scripts}"></th:block>
+
+</body>
+</html>

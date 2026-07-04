@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{admin/fragments/head :: head('BookNest | Edit Reservation')}">
+</head>
+
+<body>
+
+<div class="admin-layout">
+
+    <div th:replace="~{admin/fragments/sidebar :: sidebar}">
+    </div>
+
+    <main class="admin-content">
+
+        <div class="section-header">
+            <div class="title">
+                <span>BookNest Admin</span>
+            </div>
+
+            <h2 class="section-title">
+                Edit Reservation
+            </h2>
+        </div>
+
+        <div class="col-md-8 col-lg-6">
+
+            <form class="reservation-form"
+                  th:action="@{/admin/reservations/{id}/edit(id=${reservation.id})}"
+                  th:object="${reservationEditRequest}"
+                  method="post">
+
+                <div class="mb-3">
+                    <input type="text"
+                           class="form-control"
+                           th:value="${reservation.user.username}"
+                           disabled>
+                </div>
+
+                <div class="mb-3">
+                    <input type="text"
+                           class="form-control"
+                           th:value="${reservation.user.email}"
+                           disabled>
+                </div>
+
+                <div class="mb-3">
+                    <input type="text"
+                           class="form-control"
+                           th:value="${reservation.book.title}"
+                           disabled>
+                </div>
+
+                <div class="mb-3">
+                    <input type="text"
+                           class="form-control"
+                           th:value="${reservation.book.author}"
+                           disabled>
+                </div>
+
+                <div class="mb-3">
+                    <input type="date"
+                           id="reservationDate"
+                           name="reservationDate"
+                           class="form-control"
+                           th:value="${reservationEditRequest.reservationDate}">
+
+                    <div class="text-danger small mt-1"
+                         th:if="${#fields.hasErrors('reservationDate')}"
+                         th:errors="*{reservationDate}">
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <input type="date"
+                           id="returnDate"
+                           name="returnDate"
+                           class="form-control"
+                           th:value="${reservationEditRequest.returnDate}">
+
+                    <div class="text-danger small mt-1"
+                         th:if="${#fields.hasErrors('returnDate')}"
+                         th:errors="*{returnDate}">
+                    </div>
+                </div>
+
+                <div class="btn-wrap">
+
+                    <button type="submit"
+                            class="btn btn-outline-accent btn-accent-arrow">
+                        Save Changes
+                    </button>
+
+                    <a th:href="@{/admin/reservations}"
+                       style="margin-left:20px;">
+                        Cancel
+                    </a>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </main>
+
+</div>
+
+<div th:replace="~{admin/fragments/footer :: footer}">
+</div>
+
+</body>
+</html>

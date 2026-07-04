@@ -1,0 +1,45 @@
+<th:block th:fragment="auth-nav">
+
+    <a th:if="${session.user == null}"
+       th:href="@{/login}"
+       class="user-account for-buy">
+        <i class="icon icon-user"></i>
+        <span>Login</span>
+    </a>
+
+    <a th:if="${session.user == null}"
+       th:href="@{/register}"
+       class="user-account for-buy">
+        <i class="icon icon-user"></i>
+        <span>Register</span>
+    </a>
+
+    <span th:if="${session.user != null}"
+              class="user-account for-buy">
+        <i class="icon icon-user"></i>
+        <span th:text="${session.user.username}">Profile</span>
+    </span>
+
+    <a th:if="${session.user != null}"
+       th:href="@{/reservations/my}"
+       class="cart for-buy">
+        <i class="icon icon-clipboard"></i>
+
+        <span th:text="'Reservations (' + ${reservationCount} + ')'">
+            Reservations (0)
+        </span>
+    </a>
+
+    <a th:if="${session.user != null and session.user.role.name() == 'ADMIN'}"
+       th:href="@{/admin}"
+       class="user-account for-buy">
+        <span>Admin Section</span>
+    </a>
+
+    <a th:if="${session.user != null}"
+       th:href="@{/logout}"
+       class="user-account for-buy">
+        <span>Logout</span>
+    </a>
+
+</th:block>

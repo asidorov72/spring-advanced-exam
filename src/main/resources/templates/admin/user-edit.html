@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{admin/fragments/head :: head('Edit User')}">
+</head>
+
+<body>
+
+<div class="admin-layout">
+
+    <div th:replace="~{admin/fragments/sidebar :: sidebar}">
+    </div>
+
+    <main class="admin-content">
+
+        <div class="section-header">
+            <div class="title">
+                <span>BookNest Admin</span>
+            </div>
+
+            <h2 class="section-title">
+                Edit User
+            </h2>
+        </div>
+
+        <div class="col-md-8 col-lg-6">
+
+            <form class="auth-form"
+                  th:action="@{/admin/users/{id}/edit(id=${userId})}"
+                  th:object="${userEditRequest}"
+                  method="post">
+
+                <div class="mb-3">
+                    <input type="text"
+                           class="form-control"
+                           placeholder="First Name"
+                           th:field="*{firstName}">
+
+                    <div class="text-danger small mt-1"
+                         th:if="${#fields.hasErrors('firstName')}"
+                         th:errors="*{firstName}">
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <input type="text"
+                           class="form-control"
+                           placeholder="Last Name"
+                           th:field="*{lastName}">
+
+                    <div class="text-danger small mt-1"
+                         th:if="${#fields.hasErrors('lastName')}"
+                         th:errors="*{lastName}">
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <input type="email"
+                           class="form-control"
+                           placeholder="Email"
+                           th:field="*{email}">
+
+                    <div class="text-danger small mt-1"
+                         th:if="${#fields.hasErrors('email')}"
+                         th:errors="*{email}">
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <select class="form-control" th:field="*{role}">
+                        <option value="">Select a Role</option>
+                        <option th:each="role : ${roles}"
+                                th:value="${role}"
+                                th:text="${role}">
+                        </option>
+                    </select>
+
+                    <div class="text-danger small mt-1"
+                         th:if="${#fields.hasErrors('role')}"
+                         th:errors="*{role}">
+                    </div>
+                </div>
+
+                <div class="btn-wrap">
+
+                    <button type="submit"
+                            class="btn btn-outline-accent btn-accent-arrow">
+                        Save Changes
+                    </button>
+
+                    <a th:href="@{/admin/users}"
+                       style="margin-left:20px;">
+                        Cancel
+                    </a>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </main>
+
+</div>
+
+<div th:replace="~{admin/fragments/footer :: footer}">
+</div>
+
+</body>
+</html>

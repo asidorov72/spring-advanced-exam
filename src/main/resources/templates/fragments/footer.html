@@ -1,0 +1,64 @@
+<div th:fragment="footer">
+    <footer id="footer">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-4">
+                    <div class="footer-item">
+                        <div class="company-brand">
+                            <img th:src="@{/images/main-logo.png}" alt="logo" class="footer-logo">
+                            <p>
+                                BookNest is a simple online library where readers can browse books,
+                                view details, and reserve their next read.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <th:block th:replace="~{fragments/footer-menu :: footerMenu}"></th:block>
+
+            </div>
+            <!-- / row -->
+
+        </div>
+    </footer>
+    <div id="footer-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+
+                    <div class="copyright">
+                        <div class="row">
+
+                            <div class="col-md-6">
+                                <p>© 2022 All rights reserved. Free HTML Template by <a
+                                        href="https://www.templatesjungle.com/" target="_blank">TemplatesJungle</a></p>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="social-links align-right">
+                                    <ul>
+                                        <li>
+                                            <a href="#"><i class="icon icon-facebook"></i></a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><i class="icon icon-twitter"></i></a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><i class="icon icon-youtube-play"></i></a>
+                                        </li>
+                                        <li>
+                                            <a href="#"><i class="icon icon-behance-square"></i></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div><!--grid-->
+
+                </div><!--footer-bottom-content-->
+            </div>
+        </div>
+    </div>
+</div>

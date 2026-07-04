@@ -1,0 +1,113 @@
+<div th:fragment="navbar">
+    <div id="header-wrap">
+
+        <div class="top-content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="social-links">
+                            <ul>
+                                <li>
+                                    <a href="#"><i class="icon icon-facebook"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="icon icon-twitter"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="icon icon-youtube-play"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="icon icon-behance-square"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="right-element">
+
+                            <th:block th:replace="~{fragments/auth-nav :: auth-nav}"></th:block>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <header id="header">
+            <div class="container-fluid">
+                <div class="row">
+
+                    <div class="col-md-2">
+                        <div class="main-logo">
+                            <a th:href="@{/}">
+                                <img th:src="@{/images/main-logo.png}" alt="logo">
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-md-10">
+
+                        <nav id="navbar">
+                            <div class="main-menu stellarnav">
+                                <ul class="menu-list">
+
+                                    <li th:class="${activePage == 'home'} ? 'menu-item active' : 'menu-item'">
+                                        <a th:href="@{/}">Home</a>
+                                    </li>
+
+                                    <li th:class="${activePage == 'books'} ? 'menu-item active' : 'menu-item'">
+                                        <a th:href="@{/books}">Books</a>
+                                    </li>
+
+                                    <li class="menu-item has-sub">
+                                        <a href="#"
+                                           th:class="${activePage == 'pages'} ? 'nav-link active' : 'nav-link'">
+                                            Pages
+                                        </a>
+
+                                        <ul>
+                                            <li>
+                                                <a th:href="@{/about}">About</a>
+                                            </li>
+                                            <li>
+                                                <a th:href="@{/books}">Our Store</a>
+                                            </li>
+                                            <li>
+                                                <a th:href="@{/contact}">Contact</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+
+                                    <li class="menu-item">
+                                        <a th:href="@{/#featured-books}">Featured</a>
+                                    </li>
+
+                                    <li class="menu-item">
+                                        <a th:href="@{/#popular-books}">Popular</a>
+                                    </li>
+
+                                    <li class="menu-item">
+                                        <a th:href="@{/#recently-added}">Recently Added</a>
+                                    </li>
+
+                                </ul>
+
+                                <div class="hamburger">
+                                    <span class="bar"></span>
+                                    <span class="bar"></span>
+                                    <span class="bar"></span>
+                                </div>
+
+                            </div>
+                        </nav>
+
+                    </div>
+
+                </div>
+            </div>
+        </header>
+
+    </div>
+</div>

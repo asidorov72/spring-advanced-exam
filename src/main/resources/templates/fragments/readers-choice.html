@@ -1,0 +1,76 @@
+<div th:fragment="readersChoice">
+
+    <section id="readers-choice"
+             class="leaf-pattern-overlay"
+             th:if="${readersChoiceBook != null}">
+
+        <div class="corner-pattern-overlay"></div>
+
+        <div class="container">
+            <div class="row justify-content-center">
+
+                <div class="col-md-8">
+
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <figure class="products-thumb">
+                                <img th:src="${readersChoiceBook.bookImage == null or #strings.isEmpty(readersChoiceBook.bookImage.trim())
+                                    ? '/images/single-no-image-cover.png'
+                                    : readersChoiceBook.bookImage}"
+                                     th:alt="${readersChoiceBook.title}"
+                                     class="single-image">
+                            </figure>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="product-entry">
+
+                                <h2 class="section-title divider">
+                                    Readers' Choice Book
+                                </h2>
+
+                                <div class="products-content">
+
+                                    <div class="author-name"
+                                         th:text="'By ' + ${readersChoiceBook.author}">
+                                        By Author
+                                    </div>
+
+                                    <h3 class="item-title"
+                                        th:text="${readersChoiceBook.title}">
+                                        Book Title
+                                    </h3>
+
+                                    <p th:text="${#strings.abbreviate(readersChoiceBook.description, 180)}">
+                                        Book description
+                                    </p>
+
+                                    <div class="item-price"
+                                         th:text="'Reserve for $ ' + ${readersChoiceBook.rentalPrice}">
+                                        Reserve for $ 10.00
+                                    </div>
+
+                                    <div class="btn-wrap">
+                                        <a th:href="@{/books/{id}(id=${readersChoiceBook.id})}"
+                                           class="btn-accent-arrow">
+                                            View Details
+                                            <i class="icon icon-ns-arrow-right"></i>
+                                        </a>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+
+</div>

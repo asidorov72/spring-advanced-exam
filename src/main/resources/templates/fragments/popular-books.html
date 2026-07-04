@@ -1,0 +1,119 @@
+<div th:fragment="popularBooks">
+
+    <section id="popular-books" class="bookshelf py-5 my-5">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+
+                    <div class="section-header align-center">
+                        <div class="title">
+                            <span>Some quality items</span>
+                        </div>
+                        <h2 class="section-title">Popular Books</h2>
+                    </div>
+
+                    <ul class="tabs">
+                        <li data-tab-target="#all-genre" class="active tab">All Genres</li>
+
+                        <li th:each="genre : ${genres}"
+                            th:data-tab-target="'#' + ${#strings.toLowerCase(genre.name())}"
+                            class="tab"
+                            th:text="${genre.displayName}">
+                            Genre
+                        </li>
+                    </ul>
+
+                    <div class="tab-content">
+
+                        <div id="all-genre" data-tab-content class="active">
+                            <div class="row">
+
+                                <div class="col-md-3"
+                                     th:each="book : ${popularBooks}">
+
+                                    <div class="product-item">
+                                        <figure class="product-style">
+                                            <img th:src="${book.bookImage == null or #strings.isEmpty(book.bookImage.trim())
+                                                ? '/images/product-item-no-image-cover.png'
+                                                : book.bookImage}"
+                                                 th:alt="${book.title}"
+                                                 class="book-cover-img">
+                                        </figure>
+
+                                        <figcaption>
+                                            <h3 th:text="${book.title}">Book title</h3>
+                                            <span th:text="${book.author}">Author</span>
+
+                                            <div class="item-price"
+                                                 th:text="'Reserve for $ ' + ${book.rentalPrice}">
+                                                Price
+                                            </div>
+
+                                            <div class="btn-wrap mt-3">
+                                                <a th:href="@{/books/{id}(id=${book.id})}"
+                                                   class="btn btn-outline-accent btn-accent-arrow">
+                                                    View Details
+                                                    <i class="icon icon-ns-arrow-right"></i>
+                                                </a>
+                                            </div>
+                                        </figcaption>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div th:each="genre : ${genres}"
+                             th:id="${#strings.toLowerCase(genre.name())}"
+                             data-tab-content>
+
+                            <div class="row">
+
+                                <div class="col-md-3"
+                                     th:each="book : ${popularBooks}"
+                                     th:if="${book.genre == genre}">
+
+                                    <div class="product-item">
+                                        <figure class="product-style">
+                                            <img th:src="${book.bookImage == null or #strings.isEmpty(book.bookImage.trim())
+                                                ? '/images/product-item-no-image-cover.png'
+                                                : book.bookImage}"
+                                                 th:alt="${book.title}"
+                                                 class="book-cover-img">
+                                        </figure>
+
+                                        <figcaption>
+                                            <h3 th:text="${book.title}">Book title</h3>
+                                            <span th:text="${book.author}">Author</span>
+
+                                            <div class="item-price"
+                                                 th:text="'Reserve for $ ' + ${book.rentalPrice}">
+                                                Price
+                                            </div>
+
+                                            <div class="btn-wrap mt-3">
+                                                <a th:href="@{/books/{id}(id=${book.id})}"
+                                                   class="btn btn-outline-accent btn-accent-arrow">
+                                                    View Details
+                                                    <i class="icon icon-ns-arrow-right"></i>
+                                                </a>
+                                            </div>
+                                        </figcaption>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+</div>

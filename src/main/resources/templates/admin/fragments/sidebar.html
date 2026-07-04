@@ -1,0 +1,42 @@
+<th:block th:fragment="sidebar">
+
+    <aside class="admin-sidebar">
+
+        <div class="admin-brand">
+            BookNest Admin
+        </div>
+
+        <a th:href="@{/admin}"
+           th:classappend="${activePage == 'dashboard'} ? 'active' : ''">
+            Dashboard
+        </a>
+
+        <a th:href="@{/admin/users}"
+           th:classappend="${activePage == 'users'} ? 'active' : ''">
+            Users
+        </a>
+
+        <a th:href="@{/admin/books}"
+           th:classappend="${activePage == 'books'} ? 'active' : ''">
+            Books
+        </a>
+
+        <a th:href="@{/admin/reservations}"
+           th:classappend="${activePage == 'reservations'} ? 'active' : ''">
+            Reservations
+        </a>
+
+        <a th:href="@{/admin/transactions}"
+           th:classappend="${activePage == 'transactions'} ? 'active' : ''">
+            Transactions
+        </a>
+
+        <hr>
+
+        <a th:href="@{/}">
+            Back to Home
+        </a>
+
+    </aside>
+
+</th:block>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/head :: head('All Books')}"></head>
+
+<body>
+
+<div th:replace="~{fragments/navbar :: navbar}"></div>
+
+<section class="py-5 my-5">
+
+    <div class="container">
+
+        <div class="section-header align-center">
+            <div class="title">
+                <span>Browse our collection</span>
+            </div>
+            <h2 class="section-title">All Books</h2>
+        </div>
+
+        <form th:action="@{/books}"
+              method="get"
+              class="mb-5">
+
+            <div style="display: flex; justify-content: center; align-items: center; gap: 12px;">
+
+                <input type="text"
+                       name="query"
+                       class="form-control"
+                       placeholder="Search books..."
+                       th:value="${query}"
+                       style="width: 520px; height: 46px; margin: 0;">
+
+                <a href="#"
+                   onclick="this.closest('form').submit(); return false;"
+                   class="btn btn-outline-accent btn-accent-arrow"
+                   style="height: 46px; display: flex; align-items: center; margin: 0;">
+                    Search
+                </a>
+
+                <a th:if="${query != null and !#strings.isEmpty(query)}"
+                   th:href="@{/books}"
+                   class="btn btn-outline-accent btn-accent-arrow"
+                   style="height: 46px; display: flex; align-items: center; margin: 0;">
+                    Clear
+                </a>
+
+            </div>
+
+        </form>
+
+        <div th:if="${query != null and !#strings.isEmpty(query)}"
+             class="text-center mb-4">
+            Search results for:
+            <strong th:text="${query}">query</strong>
+        </div>
+
+        <div th:if="${#lists.isEmpty(books)}"
+             class="text-center py-5">
+            No books found.
+        </div>
+
+        <div class="row"
+             th:unless="${#lists.isEmpty(books)}">
+
+            <div class="col-md-3"
+                 th:each="book : ${books}">
+
+                <div class="product-item">
+
+                    <figure class="product-style">
+
+                        <img th:src="${book.bookImage == null or #strings.isEmpty(book.bookImage.trim())
+                                ? '/images/product-item-no-image-cover.png'
+                                : book.bookImage}"
+                             th:alt="${book.title}"
+                             class="book-cover-img">
+
+                    </figure>
+
+                    <figcaption>
+
+                        <h3 th:text="${book.title}">
+                            Book Title
+                        </h3>
+
+                        <span th:text="${book.author}">
+                            Author
+                        </span>
+
+                        <div class="item-price"
+                             th:text="'Reserve for $ ' + ${book.rentalPrice}">
+                            Reserve for $ 10.00
+                        </div>
+
+                        <div class="btn-wrap mt-3">
+                            <a th:href="@{/books/{id}(id=${book.id})}"
+                               class="btn btn-outline-accent btn-accent-arrow">
+                                View Details
+                                <i class="icon icon-ns-arrow-right"></i>
+                            </a>
+                        </div>
+
+                    </figcaption>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+<th:block th:replace="~{fragments/scripts :: scripts}"></th:block>
+
+</body>
+</html>

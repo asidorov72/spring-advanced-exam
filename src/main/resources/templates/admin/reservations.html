@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{admin/fragments/head :: head('BookNest | Reservations Management')}">
+</head>
+
+<body>
+
+<div class="admin-layout">
+
+    <div th:replace="~{admin/fragments/sidebar :: sidebar}">
+    </div>
+
+    <main class="admin-content">
+
+        <div th:replace="~{admin/fragments/header :: header('Reservations Management')}">
+        </div>
+
+        <div class="admin-card">
+
+            <table class="admin-table">
+
+                <thead>
+                <tr>
+                    <th>USER</th>
+                    <th>EMAIL</th>
+                    <th>BOOK</th>
+                    <th>AUTHOR</th>
+                    <th>RESERVED ON</th>
+                    <th>RETURN DATE</th>
+                    <th>ACTIONS</th>
+                </tr>
+                </thead>
+
+                <tbody>
+
+                <tr th:if="${#lists.isEmpty(reservations)}">
+                    <td colspan="7" class="empty-state">
+                        No reservations found.
+                    </td>
+                </tr>
+
+                <tr th:each="reservation : ${reservations}">
+
+                    <td th:text="${reservation.user.username}">
+                        Username
+                    </td>
+
+                    <td th:text="${reservation.user.email}">
+                        Email
+                    </td>
+
+                    <td th:text="${reservation.book.title}">
+                        Book Title
+                    </td>
+
+                    <td th:text="${reservation.book.author}">
+                        Author
+                    </td>
+
+                    <td th:text="${#temporals.format(reservation.reservationDate, 'dd.MM.yyyy')}">
+                        19.06.2026
+                    </td>
+
+                    <td th:text="${#temporals.format(reservation.returnDate, 'dd.MM.yyyy')}">
+                        03.07.2026
+                    </td>
+
+                    <td>
+                        <div class="d-flex flex-column gap-1">
+
+                            <a th:href="@{/admin/reservations/{id}/edit(id=${reservation.id})}"
+                               class="admin-action-btn">
+                                Edit
+                            </a>
+
+                            <a th:href="@{/admin/reservations/{id}/delete(id=${reservation.id})}"
+                               class="admin-action-btn"
+                               th:attr="onclick=|return confirm('Delete reservation for ${reservation.book.title}?');|">
+                                Delete
+                            </a>
+
+                        </div>
+                    </td>
+
+                </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </main>
+
+</div>
+
+<div th:replace="~{admin/fragments/footer :: footer}">
+</div>
+
+</body>
+</html>
