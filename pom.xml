@@ -9,10 +9,10 @@
         <relativePath/>
     </parent>
     <groupId>bg.softuni</groupId>
-    <artifactId>booknest</artifactId>
+    <artifactId>booknest-advanced</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>booknest</name>
-    <description>booknest</description>
+    <name>Booknest Advanced</name>
+    <description>Spring Advanced Individual Project</description>
     <url/>
     <licenses>
         <license/>
