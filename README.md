@@ -1,6 +1,6 @@
-# BookNest
+# BookNest Advanced
 
-BookNest is an online book reservation platform built with Spring Boot and Thymeleaf as part of the SoftUni Spring Fundamentals course.
+BookNest Advanced is an online book reservation platform built with Spring Boot and Thymeleaf as part of the SoftUni Spring Fundamentals course.
 
 The application allows users to browse books, reserve books, manage personal reservations, and provides an administration area for managing users, books, reservations, and transactions.
 
